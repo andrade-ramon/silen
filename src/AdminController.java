@@ -1,0 +1,30 @@
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import entregas.EntregasService;
+import model.Entrega;
+
+@WebServlet(urlPatterns = {"/adm_entregas"})
+public class AdminController extends HttpServlet {
+	
+	public AdminController(){
+		super();
+	}
+
+	private static final long serialVersionUID = 1L;
+	
+	@Override
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		EntregasService entregasService = new EntregasService();
+		List<Entrega> entregas = entregasService.listarTodasEntregas();
+	
+		request.setAttribute("entregas", entregas);
+		request.getRequestDispatcher("adm_entregas.jsp").forward(request, response);
+	}
+}
