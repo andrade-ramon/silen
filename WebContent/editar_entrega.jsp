@@ -221,7 +221,7 @@
 								            <div class="col-md-1  pull-left" id="divPesquisar">
 								                <a href="${pageContext.request.contextPath}/entregas" class="btn btn-info">Cancelar</a>
 								           </div>
-								        </div>
+                                        </div>
 								    </div>
 								</form>
 							</div>
