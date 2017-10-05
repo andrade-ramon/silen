@@ -16,6 +16,6 @@ public class ConnectionFactory {
 	}
 	
 	public static Connection obterConexao () throws SQLException{
-		return DriverManager.getConnection("jdbc:mysql://localhost/projeto_tcc_silen", "root", "");
+		return DriverManager.getConnection("jdbc:mysql://localhost/projeto_tcc_silen?useTimezone=true&serverTimezone=UTC", "root", "");
 	}
 }

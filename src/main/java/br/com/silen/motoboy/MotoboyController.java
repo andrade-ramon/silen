@@ -1,33 +1,27 @@
 package br.com.silen.motoboy;
 
-import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.springframework.composed.web.Get;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.servlet.ModelAndView;
 
 import br.com.silen.entregas.Entrega;
 import br.com.silen.entregas.EntregasService;
 
-@WebServlet(urlPatterns = {"/motoboy_entregas"})
-public class MotoboyController extends HttpServlet {
+@Controller
+public class MotoboyController {
 	
-	public MotoboyController(){
-		super();
-	}
-
-	private static final long serialVersionUID = 1L;
-	
-	@Override
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	@Get("/motoboy_entregas")
+	public ModelAndView motoboyEntregas(){
 		EntregasService entregasService = new EntregasService();
 		List<Entrega> entregas = entregasService.listarEntregasDe(1);
 	
-		request.setAttribute("entregas", entregas);
-		request.getRequestDispatcher("motoboy_entregas.jsp").forward(request, response);
+		ModelAndView modelAndView = new ModelAndView("motoboy/entregas");
+		
+		modelAndView.addObject("entregas", entregas);
+		
+		return modelAndView;
 	}
 	
 }	

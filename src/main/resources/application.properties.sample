@@ -1,0 +1,11 @@
+env=dev
+
+spring.mvc.view.prefix=/WEB-INF/jsp/
+spring.mvc.view.suffix=.jsp
+
+db.url=jdbc:mysql://localhost:3306/projeto_tcc_silen?useTimezone=true&serverTimezone=UTC
+db.username=root
+db.password=
+db.driver=com.mysql.jdbc.Driver
+
+hibernate.show_sql=false
