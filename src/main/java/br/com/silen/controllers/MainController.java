@@ -4,13 +4,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.silen.user.User;
+import br.com.silen.user.UserType;
 
 @Controller
 public class MainController {
 	
 	@Get("/inicio")
 	public ModelAndView inicio() {
-		User user = new User(1l, "Ramon", "ramon.andrade@elo7.com");
+		User user = new User("Ramon", "ramon.andrade@elo7.com", "ramon", UserType.ADMIN);
 	
 		ModelAndView modelAndView = new ModelAndView("main/page");
 		modelAndView.addObject("user", user);

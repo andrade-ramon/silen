@@ -16,7 +16,7 @@ public class MotoboyController {
 	public ModelAndView motoboyEntregas(){
 		EntregasService entregasService = new EntregasService();
 		List<Entrega> entregas = entregasService.listarEntregasDe(1);
-	
+		
 		ModelAndView modelAndView = new ModelAndView("motoboy/entregas");
 		
 		modelAndView.addObject("entregas", entregas);
