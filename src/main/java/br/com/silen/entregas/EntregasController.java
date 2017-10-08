@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class EntregasController {
-
+	
 	@Get("/entregas")
 	public ModelAndView list() {
 		EntregasService entregasService = new EntregasService();

@@ -7,7 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.silen.model.Cliente;
+import br.com.silen.model.Cliente2;
 import br.com.silen.service.ClienteService;
 
 public class Cliente_Atualizar implements Command {
@@ -33,7 +33,7 @@ public class Cliente_Atualizar implements Command {
 		String cepCliente = request.getParameter("cepCliente");
 		int idTipoContrato = Integer.parseInt(request.getParameter("idTipoContrato"));
 
-		Cliente cliente = new Cliente();
+		Cliente2 cliente = new Cliente2();
 		cliente.setIdCliente(idCliente);
 		cliente.setNomeCliente(nomeCliente);
 		cliente.setCPFCNPJ(CPFCNPJ);

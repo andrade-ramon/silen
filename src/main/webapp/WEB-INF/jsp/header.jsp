@@ -4,7 +4,7 @@
 	<div id="navbar-container" class="boxed">
 		<div class="navbar-header">
 			<a href="index.html" class="navbar-brand">
-				<img src="img/logo.png" alt="Silen Logo" class="brand-icon" />
+				<img src="${pageContext.request.contextPath}/img/logo.png" alt="Silen Logo" class="brand-icon" />
         		<div class="brand-title">
           			<span class="brand-text">Silen</span>
         		</div>

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.silen.command.Command;
-import br.com.silen.model.Cliente;
+import br.com.silen.model.Cliente2;
 import br.com.silen.service.ClienteService;
 
 public class ApagarCliente implements Command {
@@ -17,7 +17,7 @@ public class ApagarCliente implements Command {
 	public void executa(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		ClienteService clienteService = new ClienteService();
 		int idCliente = Integer.parseInt(request.getParameter("idCliente"));
-		Cliente cliente = new Cliente();
+		Cliente2 cliente = new Cliente2();
 		cliente.setIdCliente(idCliente);
 		
 		

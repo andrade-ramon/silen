@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.silen.factory.ConnectionFactory;
-import br.com.silen.model.Cliente;
+import br.com.silen.model.Cliente2;
 
 
 public class ClienteDAO {
 
-	public void criar (Cliente cliente) throws SQLException {
+	public void criar (Cliente2 cliente) throws SQLException {
 		String sqlInsert = "INSERT INTO tb_cliente (nomeCliente, CPFCNPJ, telCelular, telFixo, telRecado, email, enderecoCliente, numeroCliente, complementoCliente, bairroCliente, cidadeCliente, estadoCliente, cepCliente,idTipoContrato) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		try (Connection conn  = ConnectionFactory.obterConexao();
 				PreparedStatement ps = conn.prepareStatement(sqlInsert)){
@@ -48,7 +48,7 @@ public class ClienteDAO {
 		}
 	}
 	
-	public void apagar (Cliente cliente)throws SQLException {
+	public void apagar (Cliente2 cliente)throws SQLException {
 		String sqlDelete = "DELETE FROM tb_cliente WHERE idCliente = ?";
 		try (Connection conn = ConnectionFactory.obterConexao();
 				PreparedStatement ps = conn.prepareStatement(sqlDelete);){
@@ -60,9 +60,9 @@ public class ClienteDAO {
 		}
 	}
  
-	public Cliente carregar(int idCliente, String nomeCliente) throws SQLException  {
+	public Cliente2 carregar(int idCliente, String nomeCliente) throws SQLException  {
 		String sqlSelect = "SELECT * FROM tb_cliente WHERE id = ? or nomeCliente = ?";
-		Cliente cliente = new Cliente();
+		Cliente2 cliente = new Cliente2();
 		try(Connection conn = ConnectionFactory.obterConexao();
 				PreparedStatement ps = conn.prepareStatement(sqlSelect)){
 			ps.setInt(1, idCliente);
@@ -91,7 +91,7 @@ public class ClienteDAO {
 		return cliente;
 	}
 	
-	public void atualizar(Cliente cliente) throws SQLException  {
+	public void atualizar(Cliente2 cliente) throws SQLException  {
 		String sqlUpdate = "UPDATE tb_cliente SET nomeCliente= ?, CPFCNPJ=?, telCelular = ?, telFixo = ?, telRecado = ?, email=?, enderecoCliente = ?, numeroCliente = ?, complementoCliente = ?, bairroCliente = ?, cidadeCliente = ?, estadoCliente = ?, cepCliente = ? where idCliente = ?";
 		// usando o try with resources do Java 7, que fecha o que abriu
 		try (Connection conn = ConnectionFactory.obterConexao();
@@ -119,13 +119,13 @@ public class ClienteDAO {
 		}
 	}	
 	
-	public List<Cliente> listarCompleto() throws SQLException {
-		List <Cliente> clientes = new ArrayList <> ();
+	public List<Cliente2> listarCompleto() throws SQLException {
+		List <Cliente2> clientes = new ArrayList <> ();
 		String sqlSelect = "SELECT * FROM tb_cliente";
 		try (Connection conn = ConnectionFactory.obterConexao();PreparedStatement ps = conn.prepareStatement(sqlSelect);
 				ResultSet rs = ps.executeQuery();){
 				while (rs.next()){
-					Cliente cliente = new Cliente ();
+					Cliente2 cliente = new Cliente2 ();
 					cliente.setIdCliente(rs.getInt("idCliente"));
 					cliente.setNomeCliente(rs.getString("nomeCliente"));
 					cliente.setCPFCNPJ(rs.getString("CPFCNPJ"));
@@ -139,9 +139,9 @@ public class ClienteDAO {
 		return clientes;
 	}
 	
-	public Cliente buscarCliente(int idCliente, int CPFCNPJ, String nomeCliente) throws SQLException  {
+	public Cliente2 buscarCliente(int idCliente, int CPFCNPJ, String nomeCliente) throws SQLException  {
 		String sqlSelect = "SELECT * FROM tb_cliente WHERE ";
-		Cliente cliente = new Cliente();
+		Cliente2 cliente = new Cliente2();
 		try(Connection conn = ConnectionFactory.obterConexao();
 				PreparedStatement ps = conn.prepareStatement(sqlSelect)){
 			ps.setInt(1, idCliente);
@@ -171,8 +171,8 @@ public class ClienteDAO {
 		return cliente;
 	}
 	
-	public List<Cliente> pesquisarCliente(int idCliente, String nomeCliente) throws SQLException  {
-		List <Cliente> clientes = new ArrayList <> ();
+	public List<Cliente2> pesquisarCliente(int idCliente, String nomeCliente) throws SQLException  {
+		List <Cliente2> clientes = new ArrayList <> ();
 		String sqlSelect;
 
 		if(idCliente != 0 && nomeCliente != ""){
@@ -196,7 +196,7 @@ public class ClienteDAO {
 				
 				try (ResultSet rs = ps.executeQuery();){				
 						while (rs.next()){	
-						Cliente cliente = new Cliente();
+						Cliente2 cliente = new Cliente2();
 						cliente.setIdCliente(rs.getInt("idCliente"));
 						cliente.setNomeCliente(rs.getString("nomeCliente"));
 						cliente.setCPFCNPJ(rs.getString("CPFCNPJ"));

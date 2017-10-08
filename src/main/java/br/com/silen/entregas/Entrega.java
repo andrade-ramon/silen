@@ -1,5 +1,10 @@
 package br.com.silen.entregas;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+//@Entity
+//@Table(name = "entregas")
 public class Entrega  {
 	
 	private int idEntrega;
