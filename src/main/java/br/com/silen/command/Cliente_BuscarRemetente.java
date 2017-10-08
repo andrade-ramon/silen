@@ -6,7 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.silen.model.Cliente;
+import br.com.silen.model.Cliente2;
 import br.com.silen.service.ClienteService;
 
 public class Cliente_BuscarRemetente implements Command{
@@ -19,7 +19,7 @@ public class Cliente_BuscarRemetente implements Command{
 		String nomeCliente = request.getParameter("txtRemetente");
 		
 		
-		Cliente cliente = clienteService.buscarCliente(idCliente,CPFCNPJ, nomeCliente);
+		Cliente2 cliente = clienteService.buscarCliente(idCliente,CPFCNPJ, nomeCliente);
 		request.setAttribute("txtEnderecoRemetente", cliente.getEnderecoCliente());
 		request.getRequestDispatcher("ExibeBuscarCliente.jsp").forward(request, response);
 			

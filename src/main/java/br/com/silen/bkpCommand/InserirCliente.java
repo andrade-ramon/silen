@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.silen.command.Command;
-import br.com.silen.model.Cliente;
+import br.com.silen.model.Cliente2;
 import br.com.silen.service.ClienteService;
 
 public class InserirCliente implements Command {
@@ -31,7 +31,7 @@ public class InserirCliente implements Command {
 		String estadoCliente = request.getParameter("estadoCliente");
 		String cepCliente = request.getParameter("cepCliente");
 		
-		Cliente Cliente = new Cliente();
+		Cliente2 Cliente = new Cliente2();
 		
 		Cliente.setNomeCliente(nomeCliente);
 		Cliente.setCPFCNPJ(CPFCNPJ);

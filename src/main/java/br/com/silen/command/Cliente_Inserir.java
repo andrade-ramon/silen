@@ -7,7 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.silen.model.Cliente;
+import br.com.silen.model.Cliente2;
 import br.com.silen.service.ClienteService;
 
 public class Cliente_Inserir implements Command {
@@ -32,7 +32,7 @@ public class Cliente_Inserir implements Command {
 		int tipoPessoa = Integer.parseInt(request.getParameter("tipoPessoa"));
 		int tipoContrato = Integer.parseInt(request.getParameter("tipoContrato"));
 		
-		Cliente Cliente = new Cliente();
+		Cliente2 Cliente = new Cliente2();
 		
 		Cliente.setNomeCliente(nomeCliente);
 		Cliente.setCPFCNPJ(CPFCNPJ);

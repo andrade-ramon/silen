@@ -1,6 +1,6 @@
 package br.com.silen.model;
 
-public class Cliente {
+public class Cliente2 {
 	
 	private int idCliente;
 	private String nomeCliente;
@@ -20,7 +20,7 @@ public class Cliente {
 	private int idTipoContrato;
 
 	
-	public Cliente(int idCliente, String nomeCliente, String CPFCNPJ, int tipoPessoa, String telCelular, String telFixo, String telRecado, String email, String enderecoCliente, String numeroCliente, String complementoCliente, String bairroCliente, String cidadeCliente, String estadoCliente, String cepCliente, int idTipoContrato, int usuarioCriacao, String dataCriacao, int usuarioModificacao, String dataModificacao){
+	public Cliente2(int idCliente, String nomeCliente, String CPFCNPJ, int tipoPessoa, String telCelular, String telFixo, String telRecado, String email, String enderecoCliente, String numeroCliente, String complementoCliente, String bairroCliente, String cidadeCliente, String estadoCliente, String cepCliente, int idTipoContrato, int usuarioCriacao, String dataCriacao, int usuarioModificacao, String dataModificacao){
 		setIdCliente( idCliente);
 		setNomeCliente( nomeCliente);
 		setCPFCNPJ( CPFCNPJ);
@@ -39,7 +39,7 @@ public class Cliente {
 		setIdTipoContrato( idTipoContrato);
 	}
 	
-	public Cliente() {
+	public Cliente2() {
 
 	}
 

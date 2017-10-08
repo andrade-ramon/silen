@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.silen.command.Command;
-import br.com.silen.model.Cliente;
+import br.com.silen.model.Cliente2;
 import br.com.silen.service.ClienteService;
 
 
@@ -35,7 +35,7 @@ public class AtualizarCliente implements Command {
 		String cepCliente = request.getParameter("cepCliente");
 		int idTipoContrato = Integer.parseInt(request.getParameter("idTipoContrato"));
 
-		Cliente cliente = new Cliente();
+		Cliente2 cliente = new Cliente2();
 		cliente.setIdCliente(idCliente);
 		cliente.setNomeCliente(nomeCliente);
 		cliente.setCPFCNPJ(CPFCNPJ);

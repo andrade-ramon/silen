@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.silen.dao.ClienteDAO;
-import br.com.silen.model.Cliente;
+import br.com.silen.model.Cliente2;
 
 
 public class ClienteService {
@@ -15,7 +15,7 @@ public class ClienteService {
 		ClienteDAO = new ClienteDAO();
 	}
 	
-	public void criar (Cliente Cliente){
+	public void criar (Cliente2 Cliente){
 		try {
 			ClienteDAO.criar(Cliente);
 		} 
@@ -24,7 +24,7 @@ public class ClienteService {
 		}
 	}
 	
-	public void atualizar (Cliente Cliente){
+	public void atualizar (Cliente2 Cliente){
 		try {
 			ClienteDAO.atualizar(Cliente);
 		} 
@@ -33,7 +33,7 @@ public class ClienteService {
 		}
 	}
 	
-	public void apagar (Cliente Cliente){
+	public void apagar (Cliente2 Cliente){
 		try {
 			ClienteDAO.apagar(Cliente);
 		} 
@@ -43,29 +43,29 @@ public class ClienteService {
 	}
 	
 	
-	public List <Cliente> listarCompleto(){
+	public List <Cliente2> listarCompleto(){
 		try {
 			return ClienteDAO.listarCompleto();
 		} 
 		catch (SQLException e) {
 			e.printStackTrace();
-			return new ArrayList <Cliente> ();
+			return new ArrayList <Cliente2> ();
 		}
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List <Cliente> carregar(int idCliente, String nomeCliente){
+	public List <Cliente2> carregar(int idCliente, String nomeCliente){
 		try {
-			return (List<Cliente>) ClienteDAO.carregar(idCliente, nomeCliente);
+			return (List<Cliente2>) ClienteDAO.carregar(idCliente, nomeCliente);
 		} 
 		catch (SQLException e) {
 			e.printStackTrace();
-			return new ArrayList <Cliente> ();
+			return new ArrayList <Cliente2> ();
 		}
 	}
 	
-	public Cliente buscarCliente(int idCliente, int CPFCNPJ, String nomeCliente){
-		Cliente cliente = new Cliente();
+	public Cliente2 buscarCliente(int idCliente, int CPFCNPJ, String nomeCliente){
+		Cliente2 cliente = new Cliente2();
 		try {
 			cliente = ClienteDAO.buscarCliente(idCliente, CPFCNPJ, nomeCliente);
 		} 
@@ -75,13 +75,13 @@ public class ClienteService {
 		return cliente;
 	}
 	
-	public List <Cliente> pesquisarCliente(int idCliente, String nomeCliente){
+	public List <Cliente2> pesquisarCliente(int idCliente, String nomeCliente){
 		try {
 			return ClienteDAO.pesquisarCliente(idCliente, nomeCliente);
 		} 
 		catch (SQLException e) {
 			e.printStackTrace();
-			return new ArrayList <Cliente> ();
+			return new ArrayList <Cliente2> ();
 		}
 	}
 	
