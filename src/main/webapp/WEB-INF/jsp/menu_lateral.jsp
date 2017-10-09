@@ -32,6 +32,12 @@
 		                  	</a>
 		                </li>
 		                <li>
+							<a href="/motoboys">
+		                    	<i class="demo-psi-receipt-4"></i>
+		                    	<span class="menu-title"><strong>Motoboys</strong></span>
+		                  	</a>
+		                </li>
+		                <li>
 							<a href="/entregas">
 		                    	<i class="demo-psi-receipt-4"></i>
 		                    	<span class="menu-title"><strong>Entregas</strong></span>
