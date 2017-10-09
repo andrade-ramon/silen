@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.springframework.data.repository.RepositoryDefinition;
 
+import br.com.silen.user.User;
+
 @RepositoryDefinition(domainClass = Motoboy.class, idClass = Long.class)
 public interface MotoboyRepository {
 	
@@ -15,5 +17,7 @@ public interface MotoboyRepository {
 	void save(Motoboy motoboy);
 
 	void delete(Motoboy motoboy);
+
+	Optional<Motoboy> findByUser(User user);
 	
 }

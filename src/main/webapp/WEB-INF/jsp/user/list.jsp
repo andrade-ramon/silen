@@ -41,65 +41,57 @@
 
 		<div class="boxed">
 			<div id="content-container">
+			    
+			    <div id="page-title">
+			        <h1 class="page-header text-overflow">Usuários</h1>
+			    </div>
 
-				<div id="page-title">
-					<h1 class="page-header text-overflow">Edição de motoboy</h1>
-				</div>
-
-				<div id="page-content">
+				<div id="page-content" >
 					<div class="row">
-						<div class="col-md-12">
-							<c:if test="${showMotoboyNotFound}">
+					    <div class="col-sm-12">
+					    	<c:if test="${showCannotDeleteUser}">
 				                <div class="alert alert-danger">
-				                    <p>Motoboy não encontrado!</p>
-				                    <a href="/motoboys">Voltar para lista de motoboys</a>
+				                    <p>Esse usuário possuí registros associados!</p>
+				                    <p>Exclua primeiro todos os registros associados para poder excluir esse usuário</p>
 				                </div>
-				                
 				            </c:if>
+					    	
 
-				            <c:if test="${showMustCreateUserFirst}">
-				            	<div class="alert alert-danger">
-				            		<p>Não existe nenhum usuário disponível para associar a um novo motoboy</p>
-				            		<p>Cadastre primeiro um usuário do tipo MOTOBOY</p>
-				            		<p><a href="/usuario">Ir para o cadastro de usuários</a> ou <p><a href="/motoboys">Voltar para a lista de motoboys</a></p>
-				            	</div>
-				            </c:if>
+					        <div class="panel">
+					        	<div class="panel-body">
+					                <div class="table-responsive">
+					                    <table class="table toggle-circle tablet breakpoint no-paging footable-loaded footable">
+					                        <thead>
+					                           <tr>
+					                                <th class="footable-visible footable-first-column footable-sortable"><font><font></font></font></th>
+					                                <th class="footable-visible footable-first-column footable-sortable"><font><font>ID</font></font></th>
+					                                <th class="footable-visible footable-first-column footable-sortable"><font><font>Login</font></font></th>
+					                                <th class="footable-visible footable-first-column footable-sortable"><font><font>Senha</font></font></th>
+					                                <th class="footable-visible footable-first-column footable-sortable"><font><font>Tipo</font></font></th>
+					                            </tr>
+					                        </thead>
+					                        <tbody>
+						                        <c:forEach items="${users}" var="user">
+													<tr>
+														<td class="text-left">
+															<a href="/usuario/${user.id}" class="btn btn-hover-warning ti-pencil-alt add-tooltip"></a>
+															<a href="/usuario/${user.id}/excluir" class="btn btn-hover-danger ti-trash add-tooltip"></a>
+														</td>
+														<td>${user.id}</td>
+														<td>${user.username}</td>
+														<td>******</td>
+														<td>${user.userType}</td>
+													</tr>
+												</c:forEach>
+					                        </tbody>
+					                    </table>
 
-				            <c:if test="${empty showMotoboyNotFound && empty showMustCreateUserFirst}">
-								<div class="panel">
-									<form class="form-group" action="/motoboys" method="POST">
-										<div class="panel-body">
-											<div class="row">
-												<div class="col-md-1">
-													<label class="control-label">ID:</label>
-		                                            <input class="form-control" name="id" value="${motoboy.id}" readonly>
-		                                        </div>
-
-		                                        <div class="col-md-3">
-													<label class="control-label">Nome:</label>
-		                                            <input class="form-control" name="nome" value="${motoboy.nome}">
-		                                        </div>
-
-		                                        <div class="col-md-3">
-		                                        	<label class="control-label">Usuário:</label>
-													<select class="form-control" name="userId">
-														<c:forEach items="${users}" var="user">
-															<option value="${user.id}" ${user.id == motoboy.user.id ? 'selected="selected"' : ''}>${user.username}</option>
-														</c:forEach>
-													</select>
-												</div>
-											</div>
-
-											<div class="row" style="margin-top:25px;">
-												<input value="Salvar" type="submit" class="btn btn-success pull-right" style="margin-left:10px"/>
-												<a href="/motoboys" class="btn btn-danger pull-right">Cancelar</a>
-											</div>
-										</div><!--/panel-body-->
-									</form>
-								</div><!--/panel-->
-							</c:if>
-						</div>
-					</div>
+					                    <a href="/usuario" class="btn btn-info pull-right">Cadastrar novo usuários</a>
+					                </div>
+								</div>
+					        </div>
+					    </div>
+				    </div>
 				</div><!--/page-content-->
 			</div><!--/content-container-->
 		</div><!--/boxed-->

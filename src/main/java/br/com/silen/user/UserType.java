@@ -4,6 +4,6 @@ public enum UserType {
 
 	ADMIN,
 	MOTOBOY,
-	CLIENTE,
+//	CLIENTE,
 	;
 }

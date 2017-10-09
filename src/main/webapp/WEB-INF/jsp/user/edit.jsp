@@ -43,56 +43,75 @@
 			<div id="content-container">
 
 				<div id="page-title">
-					<h1 class="page-header text-overflow">Edição de motoboy</h1>
+					<h1 class="page-header text-overflow">Edição de usuário</h1>
 				</div>
 
 				<div id="page-content">
 					<div class="row">
 						<div class="col-md-12">
-							<c:if test="${showMotoboyNotFound}">
+							<c:if test="${showUserNotFound}">
 				                <div class="alert alert-danger">
-				                    <p>Motoboy não encontrado!</p>
-				                    <a href="/motoboys">Voltar para lista de motoboys</a>
+				                    <p>Usuário não encontrado!</p>
+				                    <a href="/usuarios">Voltar para lista de usuários</a>
 				                </div>
-				                
 				            </c:if>
 
-				            <c:if test="${showMustCreateUserFirst}">
+				            <c:if test="${showUserNameAlreadyExists}">
 				            	<div class="alert alert-danger">
-				            		<p>Não existe nenhum usuário disponível para associar a um novo motoboy</p>
-				            		<p>Cadastre primeiro um usuário do tipo MOTOBOY</p>
-				            		<p><a href="/usuario">Ir para o cadastro de usuários</a> ou <p><a href="/motoboys">Voltar para a lista de motoboys</a></p>
+				            		<p>Já existe um usuário com o login informado</p>
 				            	</div>
 				            </c:if>
 
-				            <c:if test="${empty showMotoboyNotFound && empty showMustCreateUserFirst}">
+				            <c:if test="${empty showUserNotFound}">
 								<div class="panel">
-									<form class="form-group" action="/motoboys" method="POST">
+									<form class="form-group" action="/usuarios" method="POST">
 										<div class="panel-body">
 											<div class="row">
 												<div class="col-md-1">
 													<label class="control-label">ID:</label>
-		                                            <input class="form-control" name="id" value="${motoboy.id}" readonly>
+		                                            <input class="form-control" name="id" value="${user.id}" readonly>
 		                                        </div>
 
 		                                        <div class="col-md-3">
-													<label class="control-label">Nome:</label>
-		                                            <input class="form-control" name="nome" value="${motoboy.nome}">
+													<label class="control-label">Login:</label>
+		                                            <input class="form-control" name="username" value="${user.username}">
 		                                        </div>
 
 		                                        <div class="col-md-3">
-		                                        	<label class="control-label">Usuário:</label>
-													<select class="form-control" name="userId">
-														<c:forEach items="${users}" var="user">
-															<option value="${user.id}" ${user.id == motoboy.user.id ? 'selected="selected"' : ''}>${user.username}</option>
+		                                        	<label class="control-label">Senha:</label>
+													<input class="form-control" type="password" name="password" value="${user.password}">
+												</div>
+
+												<div class="col-md-3">
+		                                        	<label class="control-label">Tipo:</label>
+
+		                                        	<c:if test="${not empty user.id}">
+														<input class="form-control" name="userType" value="${user.userType}" readonly>
+													</c:if>
+
+													<c:if test="${empty user.id}">
+														<select class="form-control" name="userType">
+															<c:forEach items="${userTypes}" var="userType">
+																<option value="${userType}">${userType}</option>
+															</c:forEach>
+														</select>
+													</c:if>
+												</div>
+
+												<!-- <div class="col-md-3">
+		                                        	<label class="control-label">Tipo:</label>
+													<select class="form-control" name="userType">
+														<c:forEach items="${userTypes}" var="userType">
+															<option value="${user.userType}" ${user.userType == userType ? 'selected="selected"' : ''}>${userType}</option>
 														</c:forEach>
 													</select>
-												</div>
+												</div> -->
+
 											</div>
 
 											<div class="row" style="margin-top:25px;">
 												<input value="Salvar" type="submit" class="btn btn-success pull-right" style="margin-left:10px"/>
-												<a href="/motoboys" class="btn btn-danger pull-right">Cancelar</a>
+												<a href="/usuarios" class="btn btn-danger pull-right">Cancelar</a>
 											</div>
 										</div><!--/panel-body-->
 									</form>

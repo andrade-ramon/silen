@@ -25,7 +25,7 @@
             			<span class="pull-right">
               				<i class="demo-pli-male ic-user"></i>
             			</span>
-            			<div class="username hidden-xs">${user.name}</div>
+            			<div class="username hidden-xs">${loggedUser.username}</div>
           			</a>
 
           			<div class="dropdown-menu dropdown-menu-md dropdown-menu-right panel-default">

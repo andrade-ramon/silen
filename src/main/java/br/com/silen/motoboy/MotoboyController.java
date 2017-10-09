@@ -10,14 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.silen.clientes.Client;
-import br.com.silen.entregas.Entrega;
-import br.com.silen.entregas.EntregasService;
 import br.com.silen.user.User;
 import br.com.silen.user.UserRepository;
-import br.com.silen.user.UserType;
 
 @Controller
 public class MotoboyController {

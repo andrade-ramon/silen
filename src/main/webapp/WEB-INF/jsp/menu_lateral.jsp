@@ -12,8 +12,8 @@
               				</div>
               				<a href="#profile-nav" class="box-block" data-toggle="collapse" aria-expanded="false">
                 				<span class="pull-right dropdown-toggle"></span>
-                				<p class="mnp-name">${user.name}</p>
-                				<span class="mnp-desc">${user.login}</span>
+                				<p class="mnp-name">${loggedUser.username}</p>
+                				<span class="mnp-desc">${loggedUser.login}</span>
               				</a>
             			</div>
           			</div>
@@ -35,6 +35,12 @@
 							<a href="/motoboys">
 		                    	<i class="demo-psi-receipt-4"></i>
 		                    	<span class="menu-title"><strong>Motoboys</strong></span>
+		                  	</a>
+		                </li>
+		                <li>
+							<a href="/usuarios">
+		                    	<i class="demo-psi-receipt-4"></i>
+		                    	<span class="menu-title"><strong>Usuários</strong></span>
 		                  	</a>
 		                </li>
 		                <li>

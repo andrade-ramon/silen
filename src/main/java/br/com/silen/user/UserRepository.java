@@ -15,5 +15,13 @@ public interface UserRepository {
 	
 	@Query(value = "select u.* from user u left join motoboy b on b.user_id = u.id where b.id is null and u.type = 'MOTOBOY'", nativeQuery = true)
 	List<User> findAvailableMotoboys();
+
+	List<User> findAll();
+
+	void save(User user);
+
+	void delete(User user);
+
+	Optional<User> findByUsername(String username);
 	
 }
