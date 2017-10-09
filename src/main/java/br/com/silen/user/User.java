@@ -16,9 +16,6 @@ public class User {
 	@GeneratedValue
 	private Long id;
 	
-	@Column(name = "name")
-	private String name;
-	
 	@Column(name = "username")
 	private String username;
 	
@@ -29,22 +26,11 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private UserType userType;
 	
-	public User(String name, String username, String password, UserType userType) {
-		this.name = name;
-		this.username = username;
-		this.password = password;
-		this.userType = userType;
-	}
-	
 	@Deprecated //Hibernate eyes only
 	User() {}
 
 	public Long getId() {
 		return id;
-	}
-
-	public String getName() {
-		return name;
 	}
 
 	public String getUsername() {

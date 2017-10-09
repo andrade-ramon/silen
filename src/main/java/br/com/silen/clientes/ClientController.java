@@ -50,7 +50,6 @@ public class ClientController {
 	
 	@Post("/clientes")
 	public ModelAndView updateClient(@ModelAttribute Client client){
-		System.out.println(client.getId());
 		clienteRespository.save(client);
 		return new ModelAndView("redirect:/clientes");
 	}
