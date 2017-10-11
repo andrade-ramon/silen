@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.silen.security.OnlyAdmin;
 import br.com.silen.user.User;
 import br.com.silen.user.UserRepository;
 
@@ -24,6 +25,7 @@ public class MotoboyController {
 	private UserRepository userRepository;
 	
 	@Get("/motoboys")
+	@OnlyAdmin
 	public ModelAndView listMotoboys(){
 		List<Motoboy> motoboys = motoboyRepository.findAll();
 		
@@ -34,6 +36,7 @@ public class MotoboyController {
 	}
 	
 	@Get("/motoboy/{id}")
+	@OnlyAdmin
 	public ModelAndView findMotoboyById(@PathVariable Long id) {
 		Optional<Motoboy> motoboy = motoboyRepository.findById(id);
 		
@@ -52,6 +55,7 @@ public class MotoboyController {
 	}
 	
 	@Get("/motoboy")
+	@OnlyAdmin
 	public ModelAndView newMotoboy() {
 		List<User> users = userRepository.findAvailableMotoboys();
 		ModelAndView modelAndView = new ModelAndView("motoboy/edit");
@@ -64,6 +68,7 @@ public class MotoboyController {
 	}
 	
 	@Post("/motoboys")
+	@OnlyAdmin
 	public ModelAndView updateMotoboy(@ModelAttribute MotoboyDTO motoboyDTO){
 		Optional<User> user = userRepository.findById(motoboyDTO.getUserId());
 		
@@ -76,6 +81,7 @@ public class MotoboyController {
 	}
 	
 	@Get("/motoboy/{id}/excluir")
+	@OnlyAdmin
 	public ModelAndView deleteClientById(@PathVariable Long id) {
 		Optional<Motoboy> motoboy = motoboyRepository.findById(id);
 		

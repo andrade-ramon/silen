@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.silen.security.OnlyAdmin;
+
 @Controller
 public class ClientController {
 	
@@ -19,6 +21,7 @@ public class ClientController {
 	private ClientRespository clienteRespository; 
 	
 	@Get("/clientes")
+	@OnlyAdmin
 	public ModelAndView listClients(){
 		List<Client> clients = clienteRespository.findAll();
 		
@@ -29,6 +32,7 @@ public class ClientController {
 	}
 	
 	@Get("/cliente/{id}")
+	@OnlyAdmin
 	public ModelAndView getClientById(@PathVariable Long id, RedirectAttributes redirectAttributes) {
 		Optional<Client> client = clienteRespository.findById(id);
 		
@@ -43,18 +47,21 @@ public class ClientController {
 	}
 	
 	@Get("/cliente")
+	@OnlyAdmin
 	public ModelAndView newClient() {
 		ModelAndView modelAndView = new ModelAndView("client/edit");
 		return modelAndView;
 	}
 	
 	@Post("/clientes")
+	@OnlyAdmin
 	public ModelAndView updateClient(@ModelAttribute Client client){
 		clienteRespository.save(client);
 		return new ModelAndView("redirect:/clientes");
 	}
 	
 	@Get("/cliente/{id}/excluir")
+	@OnlyAdmin
 	public ModelAndView deleteClientById(@PathVariable Long id, RedirectAttributes redirectAttributes) {
 		Optional<Client> client = clienteRespository.findById(id);
 		

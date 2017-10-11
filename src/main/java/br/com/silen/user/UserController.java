@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.silen.motoboy.Motoboy;
 import br.com.silen.motoboy.MotoboyRepository;
+import br.com.silen.security.OnlyAdmin;
 
 @Controller
 public class UserController {
@@ -25,6 +26,7 @@ public class UserController {
 	private UserRepository userRepository;
 	
 	@Get("/usuarios")
+	@OnlyAdmin
 	public ModelAndView listUsers(){
 		List<User> users = userRepository.findAll();
 		
@@ -35,6 +37,7 @@ public class UserController {
 	}
 	
 	@Get("/usuario/{id}")
+	@OnlyAdmin
 	public ModelAndView findUserById(@PathVariable Long id) {
 		Optional<User> user = userRepository.findById(id);
 		
@@ -50,6 +53,7 @@ public class UserController {
 	}
 	
 	@Get("/usuario")
+	@OnlyAdmin
 	public ModelAndView newUser() {
 		ModelAndView modelAndView = new ModelAndView("user/edit");
 		modelAndView.addObject("userTypes", UserType.values());
@@ -57,6 +61,7 @@ public class UserController {
 	}
 	
 	@Post("/usuarios")
+	@OnlyAdmin
 	public ModelAndView updateUser(@ModelAttribute User user){
 		Optional<User> optionalUser = userRepository.findByUsername(user.getUsername());
 		if(optionalUser.isPresent() && optionalUser.get().getId() != user.getId()) {
@@ -71,6 +76,7 @@ public class UserController {
 	}
 	
 	@Get("/usuario/{id}/excluir")
+	@OnlyAdmin
 	public ModelAndView deleteUserById(@PathVariable Long id, RedirectAttributes redirectAttributes) {
 		Optional<User> user = userRepository.findById(id);
 		

@@ -30,7 +30,7 @@
 
           			<div class="dropdown-menu dropdown-menu-md dropdown-menu-right panel-default">
             			<div class="pad-all text-right">
-              				<a href="" class="btn btn-primary">
+              				<a href="/logout" class="btn btn-primary">
                 				<i class="demo-pli-unlock"></i>Logout
               				</a>
             			</div>
