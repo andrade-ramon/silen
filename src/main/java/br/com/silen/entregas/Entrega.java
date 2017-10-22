@@ -1,168 +1,137 @@
 package br.com.silen.entregas;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-//@Entity
-//@Table(name = "entregas")
-public class Entrega  {
-	
-	private int idEntrega;
-	private int idRemetente;
-	private int idDestinatario;
-	private int quantidade;
-	private int peso;
-	private String contato;
-	private String telefone;
-	private int idStatus;
-	private int idTipo;
-	private String dataEnvio;
-	private String dataRetirada;
-	private boolean ativo;
-	private String usuarioCriacao;
-	
-//	private Cliente remetente;
-//	private Cliente destinatario; 	
-//	private String entregador;
+import br.com.silen.caixa.Caixa;
+import br.com.silen.clientes.Client;
+import br.com.silen.motoboy.Motoboy;
 
+@Entity
+@Table(name = "entrega")
+public class Entrega {
+
+	@Id
+	@GeneratedValue
+	private long id;
+
+	@OneToOne
+	@JoinColumn(name = "cliente_id")
+	private Client cliente;
+
+	@OneToOne
+	@JoinColumn(name = "motoboy_id")
+	private Motoboy motoboy;
+
+	@OneToOne
+	@JoinColumn(name = "caixa_id")
+	private Caixa caixa;
+
+	@Column(name = "latitude")
+	private Double latitude;
+
+	@Column(name = "longitude")
+	private Double longitude;
+
+	@Column(name = "tempo")
+	private Double tempo;
 	
+	@Column(name = "status")
+	@Enumerated(EnumType.STRING)
+	private EntregaStatus status;
+
+	@Column(name = "quantidade_caixa")
+	private long quantidadeCaixa;
+
 	public Entrega() {
 	}
-	
-	public Entrega(int idEntrega) {
-		this.idEntrega = idEntrega;
+
+	public Entrega(long id, Client cliente, Motoboy motoboy, Caixa caixa, Double latitude, Double longitude,
+			Double tempo, long quantidadeCaixa, EntregaStatus status) {
+		this.id = id;
+		this.cliente = cliente;
+		this.motoboy = motoboy;
+		this.caixa = caixa;
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.tempo = tempo;
+		this.quantidadeCaixa = quantidadeCaixa;
+		this.status = status;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public Client getCliente() {
+		return cliente;
+	}
+
+	public Motoboy getMotoboy() {
+		return motoboy;
+	}
+
+	public Caixa getCaixa() {
+		return caixa;
+	}
+
+	public Double getLatitude() {
+		return latitude;
+	}
+
+	public Double getLongitude() {
+		return longitude;
+	}
+
+	public Double getTempo() {
+		return tempo;
+	}
+
+	public long getQuantidadeCaixa() {
+		return quantidadeCaixa;
+	}
+
+	public void setCliente(Client cliente) {
+		this.cliente = cliente;
+	}
+
+	public void setMotoboy(Motoboy motoboy) {
+		this.motoboy = motoboy;
+	}
+
+	public void setCaixa(Caixa caixa) {
+		this.caixa = caixa;
+	}
+
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
+
+	public void setLongitude(Double longitude) {	
+		this.longitude = longitude;
+	}
+
+	public void setTempo(Double tempo) {
+		this.tempo = tempo;
+	}
+
+	public void setQuantidadeCaixa(long quantidadeCaixa) {
+		this.quantidadeCaixa = quantidadeCaixa;
 	}
 	
-	/*public Entregas(int idEntregas) {
-		setIdEntregas(idEntregas);
-	}
-	public Entregas(int idRemetente, int idDestinatario, int quantidade, double peso, String contato, String entregador, String telefone, int idStatus, int idTipoEntrega, String dataEnvio, String dataRetirada, int usuarioCriacao) {
-		setIdEntregas(idEntregas);
-		setRemetente(remetente);
-		setDestinatario(destinatario);
-		setQuantidade(quantidade);
-		setPeso(peso);
-		setEntregador(entregador);
-		setContato(contato);
-		setTelefone(telefone);
-		setIdStatus(idStatus);
-		setIdTipoEntrega(idTipoEntrega);
-		setDataEnvio(dataEnvio);
-		setDataRetirada(dataRetirada);
-		setUsuarioCriacao(usuarioCriacao);
-	}*/
-
-	public int getIdEntrega() {
-		return idEntrega;
-	}
-
-	public void setIdEntrega(int idEntrega) {
-		this.idEntrega = idEntrega;
-	}
-
-//	public Cliente getRemetente() {
-//		return remetente;
-//	}
-
-//	public void setRemetente(Cliente remetente) {
-//		this.remetente = remetente;
-//	}
-
-//	public Cliente getDestinatario() {
-//		return destinatario;
-//	}
-
-//	public void setDestinatario(Cliente destinatario) {
-//		this.destinatario = destinatario;
-//	}
-
-	public int getQuantidade() {
-		return quantidade;
-	}
-
-	public void setQuantidade(int quantidade) {
-		this.quantidade = quantidade;
-	}
-
-	public double getPeso() {
-		return peso;
-	}
-
-	public void setPeso(int peso) {
-		this.peso = peso;
-	}
-
-	public int getIdStatus() {
-		return idStatus;
-	}
-
-	public void setIdStatus(int idStatus) {
-		this.idStatus = idStatus;
-	}
-
-//	public int getIdTipoEntrega() {
-//		return idTipoEntrega;
-//	}
-
-//	public void setIdTipoEntrega(int idTipoEntrega) {
-//		this.idTipoEntrega = idTipoEntrega;
-//	}
-
-	public String getDataEnvio() {
-		return dataEnvio;
-	}
-
-	public void setDataEnvio(String dataEnvio) {
-		this.dataEnvio = dataEnvio;
-	}
-
-	public String getDataRetirada() {
-		return dataRetirada;
-	}
-
-	public void setDataRetirada(String dataRetirada) {
-		this.dataRetirada = dataRetirada;
-	}
-
-//	public String getEntregador() {
-//		return entregador;
-//	}
-
-//	public void setEntregador(String entregador) {
-//		this.entregador = entregador;
-//	}
-
-	public String getContato() {
-		return contato;
-	}
-
-	public void setContato(String contato) {
-		this.contato = contato;
-	}
-
-	public String getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-
-	public int getIdRemetente() {
-		return idRemetente;
-	}
-
-	public void setIdRemetente(int idRemetente) {
-		this.idRemetente = idRemetente;
-	}
-
-	public int getIdDestinatario() {
-		return idDestinatario;
-	}
-
-	public void setIdDestinatario(int idDestinatario) {
-		this.idDestinatario = idDestinatario;
+	public EntregaStatus getStatus() {
+		return status;
 	}
 	
-	
+	public void setStatus(EntregaStatus status) {
+		this.status = status;
+	}
+
 }
