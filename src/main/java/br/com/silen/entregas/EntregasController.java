@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.composed.web.Get;
 import org.springframework.composed.web.Post;
 import org.springframework.stereotype.Controller;
@@ -14,31 +15,36 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.silen.caixa.Caixa;
 import br.com.silen.caixa.CaixaRepository;
 import br.com.silen.clientes.Client;
-import br.com.silen.clientes.ClientNotFoundException;
-import br.com.silen.clientes.ClientRespository;
-import br.com.silen.geolocation.GeolocationService;
-import br.com.silen.geolocation.InvalidLocationException;
-import br.com.silen.geolocation.Location;
+import br.com.silen.clientes.ClientRepository;
+import br.com.silen.motoboy.MotoboyRepository;
+import br.com.silen.security.LoggedUserService;
 import br.com.silen.security.OnlyAdmin;
 
 @Controller
 public class EntregasController {
 	
 	@Autowired
-	private EntregaRepository entregaRespository;
+	private EntregaRepository entregaRepository;
 	@Autowired
-	private ClientRespository clientRepository;
+	private ClientRepository clientRepository;
 	@Autowired
 	private CaixaRepository caixaRepository;
 	@Autowired
-	private GeolocationService geolocationService;
+	private MotoboyRepository motoboyRepository;
+	@Autowired
+	private LoggedUserService loggedUserService;
 	@Autowired
 	private EntregaFacade entregaFacade;
+	
+	@Value("${company.latitude}")
+	private Double companyLatitude;
+	@Value("${company.longitude}")
+	private Double companyLongitude;
 	
 	@Get("/entregas")
 	@OnlyAdmin
 	public ModelAndView listClients(){
-		List<Entrega> entregas = entregaRespository.findAll();
+		List<Entrega> entregas = entregaRepository.findAll();
 		
 		ModelAndView modelAndView = new ModelAndView("entrega/list");
 		modelAndView.addObject("entregas", entregas);
@@ -51,7 +57,7 @@ public class EntregasController {
 	public ModelAndView findEntregaById(@PathVariable Long id) {
 		List<Client> clientes = clientRepository.findAll();
 		List<Caixa> caixas = caixaRepository.findAll();
-		Optional<Entrega> entrega = entregaRespository.findById(id);
+		Optional<Entrega> entrega = entregaRepository.findById(id);
 		
 		ModelAndView modelAndView = new ModelAndView("entrega/edit");
 		if (!entrega.isPresent()) {
@@ -71,21 +77,65 @@ public class EntregasController {
 	public ModelAndView newEntrega() {
 		List<Client> clients = clientRepository.findAll();
 		List<Caixa> caixas = caixaRepository.findAll();
-		
 		ModelAndView modelAndView = new ModelAndView("entrega/new");
+		
+		if(motoboyRepository.findAvailableMotoboys().size() <= 0) {
+			modelAndView.addObject("showNoMotoboyAvailable", true);
+			return modelAndView;
+		} 
+		
 		modelAndView.addObject("clientes", clients);
 		modelAndView.addObject("caixas", caixas);
 		 
 		return modelAndView;
 	}
 	
+	@Get("/entregas/motoboy")
+	public ModelAndView getEntregas() {
+		Long userId = loggedUserService.getLoggedUser().get().getId();		
+		List<Entrega> entregas = entregaRepository.findAllByMotoboyUserId(userId);
+		
+		ModelAndView modelAndView = new ModelAndView("motoboy/entregas");
+		modelAndView.addObject("entregas", entregas);
+		
+		return modelAndView;
+	}
+	
+	@Get("/entrega/{id}/start")
+	public ModelAndView startEntrega(@PathVariable Long id) {
+		Entrega entrega = entregaRepository.findById(id).get();
+		
+		entrega.markAsStarted();
+		entregaRepository.save(entrega);
+			
+		return new ModelAndView("redirect:/entregas/motoboy");
+	}
+	
+	@Get("/entrega/{id}/finish")
+	public ModelAndView finishEntrega(@PathVariable Long id) {
+		Entrega entrega = entregaRepository.findById(id).get();
+		
+		entrega.markAsFinished();
+		entregaRepository.save(entrega);
+			
+		return new ModelAndView("redirect:/entregas/motoboy");
+	}
+	
+	@Get("/entrega/{entregaId}/mapa")
+	public ModelAndView getEntregaMap(@PathVariable Long entregaId) {
+		Entrega entrega = entregaRepository.findById(entregaId).get();
+		
+		ModelAndView modelAndView = new ModelAndView("entrega/map");
+		modelAndView.addObject("entrega", entrega);
+		modelAndView.addObject("companyInfo", new CompanyInfo(companyLatitude, companyLongitude));
+		
+		return modelAndView;
+	}
+	
 	@OnlyAdmin
 	@Post("/entregas")
 	public ModelAndView createEntrega(@ModelAttribute EntregaDTO entregaDTO){
-		Client client = clientRepository.findById(entregaDTO.getClienteId()).orElseThrow(ClientNotFoundException::new);
-		Location location = geolocationService.retrieveLocationFrom(client.getEndereco()).orElseThrow(InvalidLocationException::new);
-		
-		entregaFacade.create(entregaDTO, client, location);
+		entregaFacade.create(entregaDTO);
 		
 		ModelAndView modelAndView = new ModelAndView("redirect:/entregas");
 		

@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.data.repository.RepositoryDefinition;
 
 @RepositoryDefinition(domainClass = Client.class, idClass = Long.class)
-public interface ClientRespository {
+public interface ClientRepository {
 	
 	List<Client> findAll();
 

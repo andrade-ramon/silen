@@ -19,8 +19,8 @@ public class LoggedUserValidatorInterceptor extends HandlerInterceptorAdapter{
 	
 	@Autowired
 	private TokenAuthenticationService tokenService;
-	
-	public static final String TOKEN_COOKIE_NAME = "token";
+	@Autowired
+	private LoggedUserService loggedUserService;
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -38,9 +38,7 @@ public class LoggedUserValidatorInterceptor extends HandlerInterceptorAdapter{
 				return true;
 			}
 			
-			String token = getTokenFromCookie(request);
-			
-			Optional<User> user = tokenService.getUserFromToken(token);
+			Optional<User> user = loggedUserService.getLoggedUser();
 			if(!user.isPresent()) {
 				response.sendRedirect("/");
 				return false;
@@ -56,15 +54,5 @@ public class LoggedUserValidatorInterceptor extends HandlerInterceptorAdapter{
 		}
 		
 		return true;
-	}
-
-	private String getTokenFromCookie(HttpServletRequest request) {
-		Cookie[] cookies = request.getCookies();
-		for (Cookie cookie : cookies) {
-			if(TOKEN_COOKIE_NAME.equals(cookie.getName())) {
-				return cookie.getValue();
-			}
-		}
-		return "";
 	}
 }

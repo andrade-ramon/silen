@@ -18,7 +18,7 @@ import br.com.silen.security.OnlyAdmin;
 public class ClientController {
 	
 	@Autowired
-	private ClientRespository clienteRespository; 
+	private ClientRepository clienteRespository; 
 	
 	@Get("/clientes")
 	@OnlyAdmin

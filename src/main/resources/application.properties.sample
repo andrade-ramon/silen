@@ -10,4 +10,7 @@ spring.datasource.driver=com.mysql.jdbc.Driver
 
 geoapi.key=AIzaSyDoAVDb_4BRnBaa0CmUC2v0AMrlQ2PWoB0
 
+company.latitude=-23.550475
+company.longitude=-46.5969021
+
 hibernate.show_sql=false

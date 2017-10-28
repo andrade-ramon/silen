@@ -49,41 +49,49 @@
                 <div id="page-content">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="panel">
-                                <form class="form-group" action="/entregas" method="POST">
-                                    <div class="panel-body">
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <label class="control-label">Cliente:</label>
-                                                <select class="form-control" name="clienteId">
-                                                    <c:forEach items="${clientes}" var="cliente">
-                                                        <option value="${cliente.id}">${cliente.nome}</option>
-                                                    </c:forEach>
-                                                </select>
+                            <c:if test="${showNoMotoboyAvailable}">
+                                <div class="alert alert-danger">
+                                    <p>Nenhum motoboy disponivel</p>
+                                    <a href="/entregas">Voltar para lista de entregas</a>
+                                </div>
+                            </c:if>
+                            <c:if test="${empty showNoMotoboyAvailable}">
+                                <div class="panel">
+                                    <form class="form-group" action="/entregas" method="POST">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="control-label">Cliente:</label>
+                                                    <select class="form-control" name="clienteId">
+                                                        <c:forEach items="${clientes}" var="cliente">
+                                                            <option value="${cliente.id}">${cliente.nome}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <label class="control-label">Caixa:</label>
+                                                    <select class="form-control" name="caixaId">
+                                                        <c:forEach items="${caixas}" var="caixa">
+                                                            <option value="${caixa.id}">${caixa.nome}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <label class="control-label">Quantidade:</label>
+                                                    <input class="form-control" name="quantidadeCaixa">
+                                                </div>
                                             </div>
 
-                                            <div class="col-md-3">
-                                                <label class="control-label">Caixa:</label>
-                                                <select class="form-control" name="caixaId">
-                                                    <c:forEach items="${caixas}" var="caixa">
-                                                        <option value="${caixa.id}">${caixa.nome}</option>
-                                                    </c:forEach>
-                                                </select>
+                                            <div class="row" style="margin-top:25px;">
+                                                <input value="Salvar" type="submit" class="btn btn-success pull-right" style="margin-left:10px"/>
+                                                <a href="/entregas" class="btn btn-danger pull-right">Cancelar</a>
                                             </div>
-
-                                            <div class="col-md-3">
-                                                <label class="control-label">Quantidade:</label>
-                                                <input class="form-control" name="quantidadeCaixa">
-                                            </div>
-                                        </div>
-
-                                        <div class="row" style="margin-top:25px;">
-                                            <input value="Salvar" type="submit" class="btn btn-success pull-right" style="margin-left:10px"/>
-                                            <a href="/entregas" class="btn btn-danger pull-right">Cancelar</a>
-                                        </div>
-                                    </div><!--/panel-body-->
-                                </form>
-                            </div><!--/panel-->
+                                        </div><!--/panel-body-->
+                                    </form>
+                                </div><!--/panel-->
+                            </c:if>
                         </div>
                     </div>
                 </div><!--/page-content-->

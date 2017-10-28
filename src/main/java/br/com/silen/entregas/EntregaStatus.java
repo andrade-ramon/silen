@@ -1,5 +1,5 @@
 package br.com.silen.entregas;
 
 public enum EntregaStatus {
-	OPEN, FINISHED
+	ABERTA, INICIADA, FINALIZADA
 }	
