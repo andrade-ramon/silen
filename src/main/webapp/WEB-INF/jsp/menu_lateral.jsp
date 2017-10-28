@@ -60,12 +60,6 @@
 		                    	<span class="menu-title"><strong>Rastrear</strong></span>
 		                  	</a>
 		                </li>
-		                <li>
-							<a href="administrador_relatorio.html">
-		                    	<i class="demo-psi-bar-chart"></i>
-	                    		<span class="menu-title"><strong>Relatório</strong></span>
-		                  	</a>
-		                </li>
 					</ul>
 				</div>
 			</div>
