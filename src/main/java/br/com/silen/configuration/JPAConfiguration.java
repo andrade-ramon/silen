@@ -34,9 +34,10 @@ class JPAConfiguration {
 
 		Properties properties = new Properties();
 		properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
-		properties.put("hibernate.hbm2ddl.auto", "update");
+		properties.put("hibernate.hbm2ddl.auto", "create-drop");
 		properties.put("hibernate.naming_strategy", "org.hibernate.cfg.ImprovedNamingStrategy");
 		properties.put("hibernate.format_sql", "true");
+		properties.put("hibernate.generateDdl", "true");
 		properties.put("hibernate.show_sql", env.getRequiredProperty("hibernate.show_sql"));
 
 		entityManagerFactoryBean.setJpaProperties(properties);

@@ -10,6 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import br.com.silen.caixa.Caixa;
 import br.com.silen.clientes.Client;
 import br.com.silen.motoboy.Motoboy;
@@ -50,12 +53,10 @@ public class Entrega {
 	@Column(name = "quantidade_caixa")
 	private long quantidadeCaixa;
 
-	public Entrega() {
-	}
+	@Deprecated //Hibernate eyes only
+	Entrega() {}
 
-	public Entrega(long id, Client cliente, Motoboy motoboy, Caixa caixa, Double latitude, Double longitude,
-			Double tempo, long quantidadeCaixa, EntregaStatus status) {
-		this.id = id;
+	public Entrega(Client cliente, Motoboy motoboy, Caixa caixa, Double latitude, Double longitude, Double tempo, Integer quantidadeCaixa, EntregaStatus status) {
 		this.cliente = cliente;
 		this.motoboy = motoboy;
 		this.caixa = caixa;
@@ -132,6 +133,11 @@ public class Entrega {
 	
 	public void setStatus(EntregaStatus status) {
 		this.status = status;
+	}
+	
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
 	}
 
 }

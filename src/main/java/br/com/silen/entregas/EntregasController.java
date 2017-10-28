@@ -14,7 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.silen.caixa.Caixa;
 import br.com.silen.caixa.CaixaRepository;
 import br.com.silen.clientes.Client;
+import br.com.silen.clientes.ClientNotFoundException;
 import br.com.silen.clientes.ClientRespository;
+import br.com.silen.geolocation.GeolocationService;
+import br.com.silen.geolocation.InvalidLocationException;
+import br.com.silen.geolocation.Location;
 import br.com.silen.security.OnlyAdmin;
 
 @Controller
@@ -26,6 +30,10 @@ public class EntregasController {
 	private ClientRespository clientRepository;
 	@Autowired
 	private CaixaRepository caixaRepository;
+	@Autowired
+	private GeolocationService geolocationService;
+	@Autowired
+	private EntregaFacade entregaFacade;
 	
 	@Get("/entregas")
 	@OnlyAdmin
@@ -71,9 +79,16 @@ public class EntregasController {
 		return modelAndView;
 	}
 	
+	@OnlyAdmin
 	@Post("/entregas")
-	public ModelAndView createEntrega(@ModelAttribute EntregaDTO entrega){
-		System.out.println(entrega);
-		return new ModelAndView("redirect:/entregas");
+	public ModelAndView createEntrega(@ModelAttribute EntregaDTO entregaDTO){
+		Client client = clientRepository.findById(entregaDTO.getClienteId()).orElseThrow(ClientNotFoundException::new);
+		Location location = geolocationService.retrieveLocationFrom(client.getEndereco()).orElseThrow(InvalidLocationException::new);
+		
+		entregaFacade.create(entregaDTO, client, location);
+		
+		ModelAndView modelAndView = new ModelAndView("redirect:/entregas");
+		
+		return modelAndView;
 	}
 }

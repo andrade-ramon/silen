@@ -1,6 +1,7 @@
 package br.com.silen.caixa;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.repository.RepositoryDefinition;
 
@@ -8,5 +9,7 @@ import org.springframework.data.repository.RepositoryDefinition;
 public interface CaixaRepository {
 
 	List<Caixa> findAll();
+
+	Optional<Caixa> findById(Long caixaId);
 	
 }
