@@ -11,5 +11,7 @@ public interface EntregaRepository {
 	List<Entrega> findAll();
 
 	Optional<Entrega> findById(Long id);
+
+	Entrega save(Entrega entrega);
 	
 }
