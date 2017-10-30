@@ -31,7 +31,8 @@ public class LoggedUserValidatorInterceptor extends HandlerInterceptorAdapter{
 			
 			boolean isLoginPath = StringUtils.equals("/", request.getServletPath())
 					|| StringUtils.equals("/login", request.getServletPath())
-					|| StringUtils.equals("/logout", request.getServletPath());
+					|| StringUtils.equals("/logout", request.getServletPath())
+					|| StringUtils.equals("/teste", request.getServletPath());
 			boolean isErrorPath = StringUtils.equals("/error", request.getServletPath());
 			
 			if(isLoginPath || isErrorPath) {
