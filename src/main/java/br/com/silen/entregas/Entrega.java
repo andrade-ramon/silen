@@ -1,10 +1,14 @@
 package br.com.silen.entregas;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -15,6 +19,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import br.com.silen.caixa.Caixa;
 import br.com.silen.clientes.Client;
+import br.com.silen.geolocation.Location;
 import br.com.silen.motoboy.Motoboy;
 
 @Entity
@@ -22,7 +27,7 @@ import br.com.silen.motoboy.Motoboy;
 public class Entrega {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	@OneToOne
@@ -43,8 +48,11 @@ public class Entrega {
 	@Column(name = "longitude")
 	private Double longitude;
 
-	@Column(name = "tempo")
-	private Double tempo;
+	@Column(name = "started_at")
+	private Calendar startedAt;
+
+	@Column(name = "finished_at")
+	private Calendar finishedAt;
 	
 	@Column(name = "status")
 	@Enumerated(EnumType.STRING)
@@ -56,15 +64,14 @@ public class Entrega {
 	@Deprecated //Hibernate eyes only
 	Entrega() {}
 
-	public Entrega(Client cliente, Motoboy motoboy, Caixa caixa, Double latitude, Double longitude, Double tempo, Integer quantidadeCaixa, EntregaStatus status) {
+	public Entrega(Client cliente, Motoboy motoboy, Caixa caixa, Location location, Integer quantidadeCaixa) {
 		this.cliente = cliente;
 		this.motoboy = motoboy;
 		this.caixa = caixa;
-		this.latitude = latitude;
-		this.longitude = longitude;
-		this.tempo = tempo;
+		this.latitude = location.getLatitude();
+		this.longitude = location.getLongitude();
 		this.quantidadeCaixa = quantidadeCaixa;
-		this.status = status;
+		this.status = EntregaStatus.ABERTA;
 	}
 
 	public long getId() {
@@ -91,9 +98,6 @@ public class Entrega {
 		return longitude;
 	}
 
-	public Double getTempo() {
-		return tempo;
-	}
 
 	public long getQuantidadeCaixa() {
 		return quantidadeCaixa;
@@ -119,10 +123,6 @@ public class Entrega {
 		this.longitude = longitude;
 	}
 
-	public void setTempo(Double tempo) {
-		this.tempo = tempo;
-	}
-
 	public void setQuantidadeCaixa(long quantidadeCaixa) {
 		this.quantidadeCaixa = quantidadeCaixa;
 	}
@@ -134,10 +134,43 @@ public class Entrega {
 	public void setStatus(EntregaStatus status) {
 		this.status = status;
 	}
+
+	public String getStartedAt() {
+		if(startedAt == null) {
+			return "";
+		}
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		return format.format(startedAt.getTime());
+	}
 	
+	public String getFinishedAt() {
+		if(finishedAt == null) {
+			return "";
+		}
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		return format.format(finishedAt.getTime());
+	}
+	
+	public void setFinishedAt(Calendar finishedAt) {
+		this.finishedAt = finishedAt;
+	}
+	
+	public void setStartedAt(Calendar startedAt) {
+		this.startedAt = startedAt;
+	}
+	
+	public void markAsStarted() {
+		this.startedAt = Calendar.getInstance();
+		this.status = EntregaStatus.INICIADA;
+	}
+
+	public void markAsFinished() {
+		this.finishedAt = Calendar.getInstance();
+		this.status = EntregaStatus.FINALIZADA;
+	}
+
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
 	}
-
 }

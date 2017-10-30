@@ -59,7 +59,8 @@
 					                                <th class="footable-visible footable-first-column footable-sortable"><font><font>ID</font></font></th>
 					                                <th class="footable-visible footable-first-column footable-sortable"><font><font>Cliente</font></font></th>
 					                                <th class="footable-visible footable-first-column footable-sortable"><font><font>Motoboy</font></font></th>
-					                                <th class="footable-visible footable-first-column footable-sortable"><font><font>Tempo</font></font></th>
+					                                <th class="footable-visible footable-first-column footable-sortable"><font><font>Inicio</font></font></th>
+													<th class="footable-visible footable-first-column footable-sortable"><font><font>Fim</font></font></th>
 					                                <th class="footable-visible footable-first-column footable-sortable"><font><font>Status</font></font></th>
 					                            </tr>
 					                        </thead>
@@ -73,7 +74,8 @@
 														<td>${entrega.id}</td>
 														<td>${entrega.cliente.nome}</td>
 														<td>${entrega.motoboy.nome}</td>
-														<td>${entrega.tempo}</td>
+														<td>${entrega.startedAt}</td>
+														<td>${entrega.finishedAt}</td>
 														<td>${entrega.status}</td>
 													</tr>
 												</c:forEach>

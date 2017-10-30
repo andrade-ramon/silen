@@ -1,6 +1,6 @@
 package br.com.silen.login;
 
-import static br.com.silen.security.LoggedUserValidatorInterceptor.TOKEN_COOKIE_NAME;
+import static br.com.silen.security.LoggedUserService.TOKEN_COOKIE_NAME;
 
 import java.util.Optional;
 

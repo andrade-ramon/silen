@@ -49,15 +49,9 @@
 			            </c:if>
 
 		                <li>
-							<a href="/entregas">
+							<a href="${loggedUser.userType == 'MOTOBOY' ? '/entregas/motoboy' : '/entregas'}">
 		                    	<i class="demo-psi-receipt-4"></i>
 		                    	<span class="menu-title"><strong>Entregas</strong></span>
-		                  	</a>
-		                </li>
-		                <li>
-							<a href="administrador_rastrear.html">
-								<i class="demo-psi-tactic"></i>
-		                    	<span class="menu-title"><strong>Rastrear</strong></span>
 		                  	</a>
 		                </li>
 					</ul>
