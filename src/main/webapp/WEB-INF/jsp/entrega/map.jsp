@@ -33,7 +33,7 @@
     
     <link href="${pageContext.request.contextPath}/css/system.css" rel="stylesheet">
 
-    <script language=javascript src='http://maps.google.com/maps/api/js?key=AIzaSyBYLUv2Y5Y3VLOhAtQH6gYpuAP0dld0DSA'></script>
+    <script language=javascript src='https://maps.google.com/maps/api/js?key=AIzaSyBYLUv2Y5Y3VLOhAtQH6gYpuAP0dld0DSA'></script>
     <script>
 		function initializeMap() {
 			var startLatitude = parseFloat(document.getElementById("map_canvas").getAttribute("start-latitude"));
