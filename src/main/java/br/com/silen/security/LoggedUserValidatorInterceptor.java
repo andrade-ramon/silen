@@ -2,7 +2,6 @@ package br.com.silen.security;
 
 import java.util.Optional;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,8 +17,6 @@ import br.com.silen.user.User;
 public class LoggedUserValidatorInterceptor extends HandlerInterceptorAdapter{
 	
 	@Autowired
-	private TokenAuthenticationService tokenService;
-	@Autowired
 	private LoggedUserService loggedUserService;
 
 	@Override
@@ -28,14 +25,17 @@ public class LoggedUserValidatorInterceptor extends HandlerInterceptorAdapter{
 		if (handler instanceof HandlerMethod) {
 			HandlerMethod handlerMethod = (HandlerMethod) handler;
 			boolean onlyAdminCanPass = handlerMethod.getMethod().isAnnotationPresent(OnlyAdmin.class);
+			boolean isAppRoute = handlerMethod.getMethod().isAnnotationPresent(App.class) || 
+					handler.getClass().isAnnotationPresent(App.class);
 			
 			boolean isLoginPath = StringUtils.equals("/", request.getServletPath())
 					|| StringUtils.equals("/login", request.getServletPath())
 					|| StringUtils.equals("/logout", request.getServletPath())
-					|| StringUtils.equals("/teste", request.getServletPath());
+					|| StringUtils.equals("/teste", request.getServletPath())
+					|| isAppRoute;
 			boolean isErrorPath = StringUtils.equals("/error", request.getServletPath());
 			
-			if(isLoginPath || isErrorPath) {
+			if(isLoginPath || isErrorPath || isAppRoute) {
 				return true;
 			}
 			
