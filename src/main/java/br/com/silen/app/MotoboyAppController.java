@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.composed.web.Get;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.silen.entregas.Entrega;
@@ -17,9 +18,9 @@ public class MotoboyAppController {
 	private EntregaRepository entregaRepository;
 	
 	@App
-	@Get("/app/minhas-entregas")
-	public List<Entrega> getEntregas() {
-		List<Entrega> entregas = entregaRepository.findAllByMotoboyUserId(2l);
+	@Get("/app/minhas-entregas/{userId}")
+	public List<Entrega> getEntregas(@PathVariable Long userId) {
+		List<Entrega> entregas = entregaRepository.findAllByMotoboyUserId(userId);
 		
 		return entregas;
 	}
