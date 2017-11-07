@@ -18,7 +18,7 @@ public class Caixa {
 	private String nome;
 	
 	@Column(name = "tamanho")
-	private Double tamanho;
+	private Integer tamanho;
 	
 	@Column(name = "peso")
 	private Double peso;
@@ -27,7 +27,7 @@ public class Caixa {
 	Caixa() {
 	}
 	
-	public Caixa(long id, String nome, Double tamanho, Double peso) {
+	public Caixa(long id, String nome, Integer tamanho, Double peso) {
 		this.id = id;
 		this.nome = nome;
 		this.tamanho = tamanho;
@@ -42,7 +42,7 @@ public class Caixa {
 		return nome;
 	}
 
-	public Double getTamanho() {
+	public Integer getTamanho() {
 		return tamanho;
 	}
 
@@ -58,7 +58,7 @@ public class Caixa {
 		this.nome = nome;
 	}
 
-	public void setTamanho(Double tamanho) {
+	public void setTamanho(Integer tamanho) {
 		this.tamanho = tamanho;
 	}
 

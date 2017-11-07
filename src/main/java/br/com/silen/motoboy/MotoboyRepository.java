@@ -21,7 +21,9 @@ public interface MotoboyRepository {
 
 	Optional<Motoboy> findByUser(User user);
 
-	@Query(value = "select m.* from motoboy m left join entrega e on e.motoboy_id = m.id where e.id is null or e.status = 'ABERTA' ", nativeQuery = true)
+	@Query(value = "select m.* from motoboy m " +
+					" where (select count(1) from entrega e where e.motoboy_id = m.id and e.status = 'INICIADA') = 0 " +
+					" order by (select count(1) from entrega e where e.motoboy_id = m.id and e.status = 'ABERTA') DESC", nativeQuery = true)
 	List<Motoboy> findAvailableMotoboys();
 	
 }

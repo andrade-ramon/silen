@@ -135,10 +135,14 @@ public class EntregasController {
 	@OnlyAdmin
 	@Post("/entregas")
 	public ModelAndView createEntrega(@ModelAttribute EntregaDTO entregaDTO){
-		entregaFacade.create(entregaDTO);
+		try {
+			entregaFacade.create(entregaDTO);
+		} catch(Exception e) {
+			ModelAndView modelAndView = new ModelAndView("entrega/new");
+			modelAndView.addObject("showNoMotoboyAvailable", true);
+			return modelAndView;
+		}
 		
-		ModelAndView modelAndView = new ModelAndView("redirect:/entregas");
-		
-		return modelAndView;
+		return new ModelAndView("redirect:/entregas");
 	}
 }
