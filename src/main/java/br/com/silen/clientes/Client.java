@@ -51,13 +51,20 @@ public class Client {
 	@Column(name = "estado")
 	private String estado;
 
+	@Column(name = "latitude")
+	private Double latitude;
+
+	@Column(name = "longitude")
+	private Double longitude;
+
 	public Long getId() {
 		return id;
 	}
-	
-	@Deprecated //Hibernate eyes only
-	Client() {}
-	
+
+	@Deprecated // Hibernate eyes only
+	Client() {
+	}
+
 	public String getNome() {
 		return nome;
 	}
@@ -158,4 +165,19 @@ public class Client {
 		this.estado = estado;
 	}
 
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
+
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
+	}
+
+	public Double getLatitude() {
+		return latitude;
+	}
+
+	public Double getLongitude() {
+		return longitude;
+	}
 }

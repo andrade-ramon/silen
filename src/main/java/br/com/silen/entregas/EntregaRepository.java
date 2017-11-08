@@ -23,6 +23,5 @@ public interface EntregaRepository {
 	List<Entrega> findOpenEntregasByMotoboyId(@Param("motoboyId") Long motoboyId);
 	
 	@Query(value = "select e.* from entrega e where e.`motoboy_id` in (:motoboyIds) and e.status = 'ABERTA'", nativeQuery = true)
-	List<Entrega> findAllByMotoboyIds(@Param("motoboyIds") List<Long> motoboyIds);
-	
+	List<Entrega> findAllByMotoboyIds(@Param("motoboyIds") List<Long> motoboyIds);	
 }

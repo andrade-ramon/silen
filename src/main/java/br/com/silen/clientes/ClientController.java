@@ -12,16 +12,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.silen.geolocation.GeolocationService;
+import br.com.silen.geolocation.Location;
 import br.com.silen.security.OnlyAdmin;
 
 @Controller
 public class ClientController {
 	
 	@Autowired
-	private ClientRepository clienteRespository; 
+	private ClientRepository clienteRespository;
 	
-	@Get("/clientes")
+	@Autowired
+	private GeolocationService geolocationService;
+	
 	@OnlyAdmin
+	@Get("/clientes")
 	public ModelAndView listClients(){
 		List<Client> clients = clienteRespository.findAll();
 		
@@ -31,8 +36,8 @@ public class ClientController {
 		return modelAndView;
 	}
 	
-	@Get("/cliente/{id}")
 	@OnlyAdmin
+	@Get("/cliente/{id}")
 	public ModelAndView getClientById(@PathVariable Long id, RedirectAttributes redirectAttributes) {
 		Optional<Client> client = clienteRespository.findById(id);
 		
@@ -46,22 +51,26 @@ public class ClientController {
 		return modelAndView;
 	}
 	
-	@Get("/cliente")
 	@OnlyAdmin
+	@Get("/cliente")
 	public ModelAndView newClient() {
 		ModelAndView modelAndView = new ModelAndView("client/edit");
 		return modelAndView;
 	}
 	
-	@Post("/clientes")
 	@OnlyAdmin
+	@Post("/clientes")
 	public ModelAndView updateClient(@ModelAttribute Client client){
+		Location location = geolocationService.retrieveLocationFrom(client.getEndereco()).get();
+		client.setLatitude(location.getLatitude());
+		client.setLongitude(location.getLongitude());
+		
 		clienteRespository.save(client);
 		return new ModelAndView("redirect:/clientes");
 	}
 	
-	@Get("/cliente/{id}/excluir")
 	@OnlyAdmin
+	@Get("/cliente/{id}/excluir")
 	public ModelAndView deleteClientById(@PathVariable Long id, RedirectAttributes redirectAttributes) {
 		Optional<Client> client = clienteRespository.findById(id);
 		

@@ -19,7 +19,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import br.com.silen.caixa.Caixa;
 import br.com.silen.clientes.Client;
-import br.com.silen.geolocation.Location;
 import br.com.silen.motoboy.Motoboy;
 
 @Entity
@@ -42,12 +41,6 @@ public class Entrega {
 	@JoinColumn(name = "caixa_id")
 	private Caixa caixa;
 
-	@Column(name = "latitude")
-	private Double latitude;
-
-	@Column(name = "longitude")
-	private Double longitude;
-
 	@Column(name = "started_at")
 	private Calendar startedAt;
 
@@ -64,12 +57,10 @@ public class Entrega {
 	@Deprecated //Hibernate eyes only
 	Entrega() {}
 
-	public Entrega(Client cliente, Motoboy motoboy, Caixa caixa, Location location, Integer quantidadeCaixa) {
+	public Entrega(Client cliente, Motoboy motoboy, Caixa caixa, Integer quantidadeCaixa) {
 		this.cliente = cliente;
 		this.motoboy = motoboy;
 		this.caixa = caixa;
-		this.latitude = location.getLatitude();
-		this.longitude = location.getLongitude();
 		this.quantidadeCaixa = quantidadeCaixa;
 		this.status = EntregaStatus.ABERTA;
 	}
@@ -89,16 +80,7 @@ public class Entrega {
 	public Caixa getCaixa() {
 		return caixa;
 	}
-
-	public Double getLatitude() {
-		return latitude;
-	}
-
-	public Double getLongitude() {
-		return longitude;
-	}
-
-
+	
 	public long getQuantidadeCaixa() {
 		return quantidadeCaixa;
 	}
@@ -113,14 +95,6 @@ public class Entrega {
 
 	public void setCaixa(Caixa caixa) {
 		this.caixa = caixa;
-	}
-
-	public void setLatitude(Double latitude) {
-		this.latitude = latitude;
-	}
-
-	public void setLongitude(Double longitude) {	
-		this.longitude = longitude;
 	}
 
 	public void setQuantidadeCaixa(long quantidadeCaixa) {
@@ -168,9 +142,18 @@ public class Entrega {
 		this.finishedAt = Calendar.getInstance();
 		this.status = EntregaStatus.FINALIZADA;
 	}
-
+	
+	public double getLatitude() {
+		return cliente.getLatitude();
+	}
+	
+	public double getLongitude() {
+		return cliente.getLongitude();
+	}
+	
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
 	}
+
 }
