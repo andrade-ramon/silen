@@ -31,8 +31,10 @@
 	<script src="${pageContext.request.contextPath}/plugins/morris-js/raphael-js/raphael.min.js"></script>
 	<script src="${pageContext.request.contextPath}/plugins/sparkline/jquery.sparkline.min.js"></script>
 
+
 	<link href="${pageContext.request.contextPath}/css/system.css" rel="stylesheet">
-	
+
+	<script src="${pageContext.request.contextPath}/js/cliente.js"></script>
 </head>
 
 <body>
@@ -66,65 +68,65 @@
 
 	                                        <div class="col-md-3">
 												<label class="control-label">Nome:</label>
-	                                            <input class="form-control" name="nome" value="${client.nome}">
+	                                            <input class="form-control" name="nome" value="${client.nome}" maxlength="30">
 	                                        </div>
 
 	                                        <div class="col-md-3">
 	                                        	<label class="control-label">Email:</label>
-												<input class="form-control" name="email" value="${client.email}">
+												<input type="email" id="field_email" class="form-control" name="email" value="${client.email}" maxlength="30">
 											</div>
 
 											<div class="col-md-3">
 	                                        	<label class="control-label">CPF/CNPJ:</label>
-												<input class="form-control" name="cpf" value="${client.cpf}" >
+												<input id="field_cpf" class="form-control" name="cpf" value="${client.cpf}" onkeypress='mascaraMutuario(this,cpfCnpj)' onblur='clearTimeout()' maxlength="18">
 											</div>
 
 											<div class="col-md-2">
 												<label class="control-label">Sexo:</label>
-												<input class="form-control" name="sexo" value="${client.sexo}">
+												<input class="form-control" name="sexo" value="${client.sexo}" maxlength="30">
 											</div>
 										</div>
 										<div class="row" style="margin-top:25px">
 											<div class="col-md-2">
 												<label class="control-label">Telefone:</label>
-												<input class="form-control" name="telefone" value="${client.telefone}">
+												<input class="form-control" id="field_telefone" name="telefone" value="${client.telefone}">
 											</div>
 
 											<div class="col-md-4">
-												<label class="control-label">Endereço:</label>
-												<input class="form-control" name="endereco" value="${client.endereco}">
+												<label type="address" class="control-label">Endereço:</label>
+												<input class="form-control" name="endereco" value="${client.endereco}" maxlength="80">
 											</div>
 
 											<div class="col-md-1">
 												<label class="control-label">Número:</label>
-												<input class="form-control" name="enderecoNumero" value="${client.enderecoNumero}">
+												<input class="form-control" name="enderecoNumero" value="${client.enderecoNumero}" maxlength="10">
 											</div>
 
 											<div class="col-md-2">
 												<label class="control-label">Complemento:</label>
-												<input class="form-control" name="enderecoComplemento" value="${client.enderecoComplemento}">
+												<input class="form-control" name="enderecoComplemento" value="${client.enderecoComplemento}" maxlength="20">
 											</div>
 
 											<div class="col-md-3">
 												<label class="control-label">Bairro:</label>
-												<input class="form-control" name="bairro" value="${client.bairro}">
+												<input class="form-control" name="bairro" value="${client.bairro}" maxlength="40">
 											</div>
 										</div>
 
 										<div class="row" style="margin-top:25px">
 											<div class="col-md-3">
 												<label class="control-label">CEP:</label>
-												<input class="form-control" name="cep" value="${client.cep}">
+												<input id="field_cep" class="form-control" name="cep" value="${client.cep}" maxlength="9">
 											</div>
 
 											<div class="col-md-3">
 												<label class="control-label">Cidade:</label>
-												<input class="form-control" name="cidade" value="${client.cidade}">
+												<input class="form-control" name="cidade" value="${client.cidade}" maxlength="30">
 											</div>
 
 											<div class="col-md-3">
 												<label class="control-label">Estado:</label>
-												<input class="form-control" name="estado" value="${client.estado}">
+												<input class="form-control" name="estado" value="${client.estado}" maxlength="30">
 											</div>
 										</div>
 

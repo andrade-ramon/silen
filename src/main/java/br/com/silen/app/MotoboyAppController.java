@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.silen.entregas.Entrega;
 import br.com.silen.entregas.EntregaFacade;
 import br.com.silen.entregas.EntregaRepository;
-import br.com.silen.entregas.EntregaStatus;
 import br.com.silen.security.App;
 
 @RestController
