@@ -68,7 +68,7 @@
 						                        <c:forEach items="${entregas}" var="entrega">
 													<tr>
 														<td class="text-center">
-															<a href="/entrega/${entrega.id}" class="btn btn-hover-warning ti-pencil-alt add-tooltip"></a>
+															<!-- <a href="/entrega/${entrega.id}" class="btn btn-hover-warning ti-pencil-alt add-tooltip"></a> -->
 															<a href="/entrega/${entrega.id}/excluir" class="btn btn-hover-danger ti-trash add-tooltip"></a>
 														</td>
 														<td>${entrega.id}</td>

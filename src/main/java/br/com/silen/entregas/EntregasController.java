@@ -145,4 +145,11 @@ public class EntregasController {
 		
 		return new ModelAndView("redirect:/entregas");
 	}
+	
+	@OnlyAdmin
+	@Get("entrega/{entregaId}/excluir")
+	public ModelAndView deleteEntrega(@PathVariable Long entregaId) {
+		entregaRepository.deleteById(entregaId);
+		return new ModelAndView("redirect:/entregas");
+	}
 }
