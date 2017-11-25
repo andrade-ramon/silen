@@ -1,4 +1,4 @@
-package br.com.silen.factory;
+package br.com.silen.configuration;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
